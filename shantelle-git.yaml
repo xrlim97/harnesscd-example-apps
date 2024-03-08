@@ -4,3 +4,27 @@ pipeline:
   projectIdentifier: Shantelle_Project
   orgIdentifier: UX_Team
   tags: {}
+  stages:
+    - stage:
+        name: Custo
+        identifier: Custo
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo "hello"
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: <+input>
+        tags: {}
