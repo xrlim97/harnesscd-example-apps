@@ -1,0 +1,18 @@
+inputSet:
+  name: sample
+  identifier: sample
+  orgIdentifier: UX_Team
+  projectIdentifier: Shantelle_Project
+  pipeline:
+    identifier: shantelleGit
+    stages:
+      - stage:
+          identifier: Custo
+          type: Custom
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: ShellScript_1
+                    type: ShellScript
+                    timeout: 12s
