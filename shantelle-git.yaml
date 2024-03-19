@@ -28,3 +28,9 @@ pipeline:
                     outputVariables: []
                   timeout: <+input>
         tags: {}
+  variables:
+    - name: sapmple
+      type: String
+      description: ""
+      required: false
+      value: <+input>
