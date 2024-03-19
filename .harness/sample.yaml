@@ -17,3 +17,7 @@ inputSet:
                     identifier: ShellScript_1
                     type: ShellScript
                     timeout: 1m 2s
+    variables:
+      - name: sapmple
+        type: String
+        value: k
