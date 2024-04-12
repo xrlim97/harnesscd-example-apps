@@ -38,37 +38,11 @@ pipeline:
               execution:
                 steps:
                   - step:
-                      type: CustomApproval
-                      name: CustomApproval_1
-                      identifier: CustomApproval_1
+                      type: Wait
+                      name: Wait_1
+                      identifier: Wait_1
                       spec:
-                        rejectionCriteria:
-                          type: KeyValues
-                          spec:
-                            matchAnyCondition: true
-                            conditions: []
-                        approvalCriteria:
-                          type: KeyValues
-                          spec:
-                            matchAnyCondition: false
-                            conditions:
-                              - key: abc
-                                operator: equals
-                                value: "123"
-                        scriptTimeout: 10m
-                        retryInterval: 1m
-                        shell: Bash
-                        onDelegate: true
-                        source:
-                          type: Inline
-                          spec:
-                            script: <+input>.executionInput()
-                        environmentVariables: []
-                        outputVariables:
-                          - name: abc
-                            type: String
-                            value: sample
-                      timeout: 1d
+                        duration: 12s
             tags: {}
     - stage:
         name: kubernetes
