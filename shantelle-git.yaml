@@ -44,6 +44,17 @@ pipeline:
                         outputVariables: []
                       timeout: <+input>
             tags: {}
+            failureStrategies:
+              - onFailure:
+                  errors:
+                    - AllErrors
+                  action:
+                    type: ManualIntervention
+                    spec:
+                      timeout: 3m
+                      onTimeout:
+                        action:
+                          type: MarkAsSuccess
         - stage:
             name: approval
             identifier: approval
