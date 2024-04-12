@@ -15,6 +15,21 @@ pipeline:
               execution:
                 steps:
                   - step:
+                      type: HarnessApproval
+                      name: HarnessApproval_1
+                      identifier: HarnessApproval_1
+                      spec:
+                        approvalMessage: Please review the following information and approve the pipeline progression
+                        includePipelineExecutionHistory: true
+                        isAutoRejectEnabled: false
+                        approvers:
+                          userGroups:
+                            - _project_all_users
+                          minimumCount: 1
+                          disallowPipelineExecutor: false
+                        approverInputs: []
+                      timeout: 1d
+                  - step:
                       type: ShellScript
                       name: ShellScript_1
                       identifier: ShellScript_1
