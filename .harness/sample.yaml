@@ -7,16 +7,22 @@ inputSet:
   pipeline:
     identifier: shantelleGit
     stages:
-      - stage:
-          identifier: Custo
-          type: Custom
-          spec:
-            execution:
-              steps:
-                - step:
-                    identifier: ShellScript_1
-                    type: ShellScript
-                    timeout: 1m 2s
+      - parallel:
+          - stage:
+              identifier: Custo
+              type: Custom
+              spec:
+                execution:
+                  steps:
+                    - step:
+                        identifier: ShellScript_1
+                        type: ShellScript
+                        spec:
+                          source:
+                            type: Inline
+                            spec:
+                              script: <+input>
+                        timeout: <+input>
     variables:
       - name: sapmple
         type: String
