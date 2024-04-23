@@ -19,7 +19,7 @@ pipeline:
                       name: HarnessApproval_1
                       identifier: HarnessApproval_1
                       spec:
-                        approvalMessage: Please review the following information and approve the pipeline progression
+                        approvalMessage: Please reviews the following information and approve the pipeline progression
                         includePipelineExecutionHistory: true
                         isAutoRejectEnabled: false
                         approvers:
