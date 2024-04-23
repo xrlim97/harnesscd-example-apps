@@ -26,4 +26,4 @@ inputSet:
     variables:
       - name: sapmple
         type: String
-        value: sampleValue
+        value: sampleValueAbc
