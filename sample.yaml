@@ -1,0 +1,5 @@
+service:
+  name: sampleSvcGit
+  identifier: sampleSvcGit
+  orgIdentifier: UX_Team
+  projectIdentifier: Shantelle_Project
