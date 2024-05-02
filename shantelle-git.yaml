@@ -80,10 +80,9 @@ pipeline:
           service:
             serviceRef: sample_service_1678068340991
           environment:
-            environmentRef: dev_1678067453867
+            environmentRef: abcEnv
+            gitBranch: master
             deployToAll: false
-            infrastructureDefinitions:
-              - identifier: devcluster_1678067453867
           execution:
             steps:
               - step:
