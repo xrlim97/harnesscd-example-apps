@@ -2,6 +2,7 @@ inputSet:
   name: sample
   tags:
     abc: ""
+    testing: ""
   identifier: sample
   orgIdentifier: UX_Team
   projectIdentifier: Shantelle_Project
