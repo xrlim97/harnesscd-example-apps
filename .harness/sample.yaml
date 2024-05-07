@@ -1,6 +1,6 @@
 inputSet:
   name: sample
-  tags: {}
+  tags: {abc}
   identifier: sample
   orgIdentifier: UX_Team
   projectIdentifier: Shantelle_Project
