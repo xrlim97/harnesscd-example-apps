@@ -1,0 +1,31 @@
+inputSet:
+  name: sample
+  tags:
+    abc: ""
+    testing: ""
+  identifier: SampleJoyce
+  orgIdentifier: UX_Team
+  projectIdentifier: Shantelle_Project
+  pipeline:
+    identifier: shantelleGit
+    stages:
+      - parallel:
+          - stage:
+              identifier: Custo
+              type: Custom
+              spec:
+                execution:
+                  steps:
+                    - step:
+                        identifier: ShellScript_1
+                        type: ShellScript
+                        spec:
+                          source:
+                            type: Inline
+                            spec:
+                              script: <+input>
+                        timeout: <+input>
+    variables:
+      - name: sapmple
+        type: String
+        value: sampleValueAbcabc
