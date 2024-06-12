@@ -4,3 +4,9 @@ pipeline:
   projectIdentifier: Shantelle_Project
   orgIdentifier: UX_Team
   tags: {}
+  variables:
+    - name: sampleQA
+      type: String
+      description: ""
+      required: false
+      value: <+input>
