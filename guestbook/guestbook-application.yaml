@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1co
 kind: Application
 metadata:
-  name: harnesscd-app
+  name: harnesscdapp
   namespace: argocd
 spec:
   project: default
