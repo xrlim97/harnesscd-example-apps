@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1co
 kind: Application
 metadata:
-  name: harnesscdapp
+  name: harnessApp
   namespace: argocd
 spec:
   project: default
@@ -11,7 +11,7 @@ spec:
     path: guestbook
   destination:
     server: https://kubernetes.default.svc
-    namespace: harnesscd-app 
+    namespace: harnessApp
   syncPolicy:
     syncOptions:
     - CreateNameSpace=true
