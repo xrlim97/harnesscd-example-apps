@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1co
-kind: Application
+kind: Applications
 metadata:
   name: harnessApp
   namespace: argocd
@@ -8,7 +8,6 @@ spec:
   source:
     repoURL: https://github.com/xrlim97/harnesscd-example-apps.git
     targetRevision: HEAD
-    path: guestbook
   destination:
     server: https://kubernetes.default.svc
     namespace: harnessApp
