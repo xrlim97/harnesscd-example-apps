@@ -1,0 +1,619 @@
+---
+# Source: gitops-helm/templates/gitops-agent/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+automountServiceAccountToken: true
+metadata:
+  name: gitops-agent
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+---
+# Source: gitops-helm/templates/upgrader/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitops-agent-upgrader
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent-upgrader
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent-upgrader
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+---
+# Source: gitops-helm/templates/gitops-agent/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-agent-secret
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+  name: gitops-agent
+  namespace: harness-helm-guestbook
+type: Opaque
+stringData:
+  GITOPS_AGENT_TOKEN: |
+    LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFd0FJQkFEQU5CZ2txaGtpRzl3MEJBUUVGQUFTQ0JLb3dnZ1NtQWdFQUFvSUJBUUM3UGRJQ1lNZnVxZ0M4CnlxRTZnMWZNQndOWDVZMHJxdzBjR0hXR0lTOEpwU0M3YVBhQitFWW1zZXRScUhWNzhYRGUrWElSNjI1dHRWZ24KUHdaUFRjVE9Ga0pvUnVKQnRoTUlkNjNKUGNlSTkxUGFtYVp5eS9uWjE2bTFSVVZlR1F4d1E4cWRlQWxXbG81UQpPZHZTWlZnRStaallDWFQwYTdJZmRtVS9QWWpLZnJ6NFJYVVE5dkludEx2ZXpiZG9IMFU3MC9SWm1UV1V3T2N1CnpBaUlVM2VJcXVUVnVyaGJHZ0huTmxGYTRYbUFyQWpIdk4ycFVEa2x3UkFnNFdCaGhRaG9hZjN4a25HV3pkVHkKeVd6TGpBWEZKSEUwbDZSODNoWDVkSTQxZzhNQmdEdlBCZmFUNGlJRkpSVDU1NDRnNG9MR3BUYTFZejJyS0hHcAo5WmZkcjhOWkFnTUJBQUVDZ2dFQkFJSnJ1Q2xoNGtGU2R2c0pwUzROcUl6NzRZOUszSDhyUVJGdDFBYWVmSllhClIrZGlZRG45aGxlVG5GYWZvVjI0dWljRjF6ZTJKcEFTUFpud28yTi94dkxKdkczSDJmZHRiR3A4ZWpkdmFkbjAKZEpzU1pVY1czeXltdEpZSDd4NXhFaUhzaG1nUzRXWkhyazhoVGdXS0E3cExaUFF0K2lINkZmTW1VN1d1RmViOQpHTlJwU3loWXc4cFFEZFVMZDBZSVZ2THhWMG5IQTgzN29YSVU2Tzk5WThvRm9Tb0dCbmNkWlBlTUorMFJUa004CkpxOTlMK0tDalZaYmxrSnN3S0t0WTFRK0xTTzBPcTNXYU5HTFUrOW5iSVlHdm9DZktHR0xkRjdzSDhLbFZMZXAKdmxtNHRzcmpmOHdIeTUzdWVrb0tpR0U2bjRJWEN2Unh4SitFWFpVZTN0RUNnWUVBNmZzZlVQUTVhUlJZcm5UMQo1RVB1WFg0RzZ5MWs5Wi9BcGpUcUJNUzJZeitOcmhLdVo1a3puTDBVRXVrOXBSTFNTdmJEWDdLMlBVTUE3bmVkCjYydFpJYW5ObGhHeGdkMnYvakR4N2R0a3hYQUVCYU04ejEyNTlzcjczUWxzb1FYS1pHRzF4STdNN3FpUGxDZUYKVkg4bnJ0d1ovWGdhNjBFRUJEUWV6aXZrN3owQ2dZRUF6Tnl3YTQ5eEFJODJuTTNYNmFlY2ZVaHlNNTBKR1RwbgpQS1NKeHpmQ1hZWWRuZHlLZ241N05YYVRhcDlmT2FVZ1dqUUpBRzl3djhTMWRpc1BrTTJPNDJZT3d4czFsbEJ5CnZDQUJTaWJER1NoMmhGajMyMU5sdjBoUGRVcU1CTGgrNlRhSFBEQjh0d3ZEZnhpWWJrOTcxaFo3aWhwVi9uY3gKbFdZaGpEU2Y1azBDZ1lFQTZQMEptd2dHSHUrR3V2bDJYTDJVSHY2K2p2SmQ1UVFWeHF0TUdFRjFTSERoZU9QYgpUUWZOMEJhclpZVmh2LzEwNy9hMlo1WENTRkJ2SGdaNGR4TW01eEY1eVNTSE9FVHkyZEFOS0FmZVdZZ0lTVURaCjdiZHIxU2NkRTJZdUNFMkcwdHhGTHB2dnp2cUVOa2dBU1RwdzNuc0hXbEY5cEtMU0NBbUtYMHh3SkJVQ2dZRUEKZ3ZKeDVsN3E2V09oa2Z0Vmp1bnZjbmx6WGlCN3AxK1lpNy9VdmIyYmhMSnNqZkpocXVYMEZZbDAwMHVKejh3SAo4UUNmM0dKZlhJVDlSTXBqaWJpTEpEbWhKLzlsY201NzJGcFEyTGdNTHpHWkNDSGlWSlJyVGlpSGViNnIzM3lhCnlyRnJJZ01RUk9URkVxR0RGY2ZDcldiemtxUWc0YVlJMEtsV3Vrc05CbVVDZ1lFQXIyTlJRSThaek1KaXpTTkkKdlU5djJlbHMwc1VrZ01mdjgyRjlxWW56dnVXQnJtYWxReHd1Q05xMEFpWG53VklUWmRCS2Q4SmVIL2drNklUSwpaZXZhUVVvNlVtSDY0ZHozRXE5WUNXcVY3YmZjTkszWnBuNHRHT0xsMDVpaWFJaFZMbDY5S0NVY0pmcHB5T09PClJSdVRvdTh2cWFZc1JIQVZHRzJyZmdjNUQ3VT0KLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0K
+---
+# Source: gitops-helm/templates/gitops-agent/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-agent-ssh
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+  name: gitops-agent-mtls
+  namespace: harness-helm-guestbook
+type: Opaque
+data:
+  client.crt: |
+    
+  client.key: |
+---
+# Source: gitops-helm/templates/gitops-agent/configmap.yaml
+apiVersion: v1
+data:
+  GITOPS_ACCOUNT_IDENTIFIER: px7xd_BFRCi-pfWPYXVjvw
+  GITOPS_AGENT_IDENTIFIER: harnesshelmguestbook
+  GITOPS_ORG_IDENTIFIER: UX_Team
+  GITOPS_PROJECT_IDENTIFIER: Shantelle_Project
+  GITOPS_SERVICE_HTTP_TLS_ENABLED: "false"
+  GITOPS_SERVICE_HTTP_CERT_FILES: /tmp/ca.bundle
+  GITOPS_SERVICE_MTLS_ENABLED: "false"
+  GITOPS_SERVICE_HTTP_CLIENT_CERT: /etc/mtls/client.crt
+  GITOPS_SERVICE_HTTP_CLIENT_KEY: /etc/mtls/client.key
+  AGENT_HTTP_TARGET: https://qa.harness.io/gitops
+  GITOPS_SERVICE_PROTOCOL: HTTP1
+  GITOPS_AGENT_ENABLE_RECONCILE: "true"
+  GITOPS_AGENT_RECONCILE_INTERVAL: "100"
+  GITOPS_AGENT_DISCOVER_APPLICATION_PODS_DURATION_IN_SECS: "120"
+  LOG_LEVEL: debug
+  GITOPS_AGENT_FETCH_TYPE: "POLLER"
+  GITOPS_ARGOCD_REPO: argocd-repo-server
+  GITOPS_ARGOCD_REDIS: argocd-redis
+  GITOPS_ARGOCD_REDIS_HA: redis-ha
+  GITOPS_ARGOCD_REDIS_HA_PROXY: redis-ha-haproxy
+  GITOPS_ARGOCD_APP_CONTROLLER: argocd-application-controller
+  GITOPS_ARGOCD_APPSET_CONTROLLER: argocd-applicationset-controller
+  GITOPS_AGENT_AVAILABILITY_MODE: NON-HA
+  ARGOCD_SERVER_REPO_SERVER: argocd-repo-server:8081
+  REDIS_SERVER: argocd-redis:6379
+kind: ConfigMap
+metadata:
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent-cm
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+  name: gitops-agent
+  namespace: harness-helm-guestbook
+---
+# Source: gitops-helm/templates/upgrader/harness-upgrader-cm.yaml
+apiVersion: v1
+data:
+  UPGRADER_GITOPS_ACCOUNT_IDENTIFIER: px7xd_BFRCi-pfWPYXVjvw
+  UPGRADER_GITOPS_AGENT_IDENTIFIER: harnesshelmguestbook
+  UPGRADER_GITOPS_ORG_IDENTIFIER: UX_Team
+  UPGRADER_GITOPS_PROJECT_IDENTIFIER: Shantelle_Project
+  UPGRADER_MODE: GitopsAgent
+  UPGRADER_NAMESPACE: harness-helm-guestbook
+  UPGRADER_WORKLOAD_NAME: gitops-agent
+  UPGRADER_CONTAINER_NAME: gitops-agent
+  UPGRADER_GITOPS_AGENT_HTTP_TARGET: https://qa.harness.io/prod1/gitops
+  UPGRADER_GITOPS_USE_V2: "true"
+  UPGRADER_GITOPS_ALL: "false"
+kind: ConfigMap
+metadata:
+  name: gitops-agent-upgrader
+  namespace: "harness-helm-guestbook"
+---
+# Source: gitops-helm/templates/gitops-agent/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: harness-helm-guestbook-agent
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+rules:
+  - apiGroups:
+      - '*'
+    resources:
+      - '*'
+    verbs:
+      - delete
+      - get
+      - patch
+      - watch
+      - list
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - list
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - pods/log
+    verbs:
+      - get
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - applications
+      - applicationsets
+      - appprojects
+    verbs:
+      - get
+      - list
+      - update
+      - watch
+      - create
+      - patch
+      - delete
+  - apiGroups:
+      - batch
+    resources:
+      
+      - jobs
+    verbs:
+      - create
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - workflows
+    verbs:
+      
+      - create
+---
+# Source: gitops-helm/templates/gitops-agent/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: harness-helm-guestbook-agent
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: harness-helm-guestbook-agent
+subjects:
+- kind: ServiceAccount
+  name: gitops-agent
+  namespace: harness-helm-guestbook
+---
+# Source: gitops-helm/templates/gitops-agent/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: gitops-agent
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - configmaps
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - external-secrets.io
+  resources:
+    - externalsecrets
+  verbs:
+    - get
+    - list
+    - watch
+    - update
+    - patch
+    - delete
+    - create
+- apiGroups:
+    - generators.external-secrets.io
+  resources:
+    - gcraccesstokens
+    - ecrauthorizationtokens
+  verbs:
+    - get
+    - list
+    - watch
+    - update
+    - patch
+    - delete
+    - create
+- apiGroups:
+  - argoproj.io
+  resources:
+  - applications
+  - appprojects
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+  - update
+  - delete
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  - pods
+  verbs:
+  - create
+  - list
+  - watch
+  - get
+- apiGroups:
+    - apps
+  resources:
+    - deployments
+  verbs:
+    - update
+    - patch
+---
+# Source: gitops-helm/templates/upgrader/role.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: gitops-agent-upgrader
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent-upgrader
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent-upgrader
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+rules:
+  - apiGroups:
+    - batch
+    - apps
+    - extensions
+    resources:
+    - cronjobs
+    verbs:
+    - get
+    - list
+    - watch
+    - update
+    - patch
+  - apiGroups:
+    - extensions
+    - apps
+    resources:
+    - deployments
+    - statefulsets
+    verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+---
+# Source: gitops-helm/templates/gitops-agent/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gitops-agent
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: gitops-agent
+subjects:
+- kind: ServiceAccount
+  name: gitops-agent
+  namespace: harness-helm-guestbook
+---
+# Source: gitops-helm/templates/upgrader/rolebinding.yaml
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: gitops-agent-upgrader
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent-upgrader
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent-upgrader
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+roleRef:
+  kind: Role
+  name: gitops-agent-upgrader
+  apiGroup: ""
+subjects:
+  - kind: ServiceAccount
+    name: gitops-agent-upgrader
+    namespace: "harness-helm-guestbook"
+---
+# Source: gitops-helm/templates/gitops-agent/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitops-agent
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: harness-gitops-agent
+      app.kubernetes.io/instance: argocd
+  template:
+    metadata:
+      annotations:
+      labels:
+        helm.sh/chart: gitops-helm-1.1.9
+        app.kubernetes.io/name: harness-gitops-agent
+        app.kubernetes.io/instance: argocd
+        app.kubernetes.io/component: gitops-agent
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: harness-gitops
+        app.kubernetes.io/version: "v0.78.0"
+    spec:
+      terminationGracePeriodSeconds: 30
+      serviceAccountName: gitops-agent
+      containers:
+      - command:
+          - /app/agent
+        name: gitops-agent
+        image: harness/gitops-agent:v0.78.0
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: gitops-agent
+          - secretRef:
+              name: gitops-agent
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: REDIS_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: argocd-redis
+                key: redis-username
+                optional: true
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: argocd-redis
+                optional: true
+                key: auth
+          - name: REDIS_SENTINEL_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: redis-sentinel-username
+                key: redis-sentinel-username
+                optional: true
+          - name: REDIS_SENTINEL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: redis-sentinel-password
+                key: redis-sentinel-password
+                optional: true
+        volumeMounts:
+        - mountPath: /app/config/ssh
+          name: ssh-known-hosts
+        - mountPath: /app/config/tls
+          name: tls-certs
+        - mountPath: /app/config/server/tls
+          name: argocd-repo-server-tls
+        - mountPath: /home/argocd
+          name: plugins-home
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /etc/mtls
+          name: mtls-certs
+        - mountPath: /app/logs
+          name: log-volume
+        startupProbe:
+          exec:
+            command:
+              - test
+              - -s
+              - logs/agent.log
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 32
+        livenessProbe:
+          httpGet:
+            path: /healthz?full=true
+            port: 8090
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8090
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        resources:
+          limits:
+            cpu: "1"
+            memory: 512Mi
+          requests:
+            cpu: "1"
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+      volumes:
+      - name: plugins-home
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
+      - name: ssh-known-hosts
+        configMap:
+          name: argocd-ssh-known-hosts-cm
+          defaultMode: 420
+      - name: tls-certs
+        configMap:
+          name: argocd-tls-certs-cm
+          defaultMode: 420
+      - name: argocd-repo-server-tls
+        secret:
+          secretName: argocd-repo-server-tls
+          optional: true
+          items:
+          - key: tls.crt
+            path: tls.crt
+          - key: tls.key
+            path: tls.key
+          - key: ca.crt
+            path: ca.crt
+      - name: mtls-certs
+        secret:
+          secretName: gitops-agent-mtls
+          optional: true
+          items:
+          - key: client.crt
+            path: client.crt
+          - key: client.key
+            path: client.key
+      
+      - name: log-volume
+        emptyDir: { }
+      dnsPolicy: ClusterFirst
+---
+# Source: gitops-helm/templates/upgrader/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: gitops-agent-upgrader
+  namespace: "harness-helm-guestbook"
+  labels:
+    helm.sh/chart: gitops-helm-1.1.9
+    app.kubernetes.io/name: harness-gitops-agent-upgrader
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/component: gitops-agent-upgrader
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: harness-gitops
+    app.kubernetes.io/version: "v0.78.0"
+spec:
+  schedule: "0 */4 * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 20
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: gitops-agent-upgrader
+          containers:
+            - name: upgrader
+              image: harness/upgrader:latest
+              imagePullPolicy: Always
+              envFrom:
+                - configMapRef:
+                    name: gitops-agent-upgrader
+              env:
+                - name: POD_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.namespace
+                - name: UPGRADER_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      key: GITOPS_AGENT_TOKEN
+                      name: gitops-agent
+              volumeMounts:
+                - name: mtls-certs
+                  mountPath: /etc/mtls
+                - name: config-volume
+                  mountPath: /etc/config
+          volumes:
+            - name: config-volume
+              configMap:
+                name: gitops-agent-upgrader
+            - name: mtls-certs
+              secret:
+                secretName: gitops-agent-mtls
+                optional: true
+                items:
+                  - key: client.crt
+                    path: client.crt
+                  - key: client.key
+                    path: client.key
+          restartPolicy: Never
