@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1co
 kind: Application
 metadata:
-  name: harnessApp
+  name: harness-helm-guestbook
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/xrlim97/harnesscd-example-apps.git
     targetRevision: HEAD
-    path: guestbook
+    path: helm-guestbook
   destination:
     server: https://kubernetes.default.svc
-    namespace: harnessApp
+    namespace: harness-helm-guestbook
   syncPolicy:
     syncOptions:
     - CreateNameSpace=true
