@@ -108,6 +108,25 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+    - stage:
+        name: sample
+        identifier: sample
+        tags: {}
+        template:
+          templateRef: account.stage_template_harshit_3sep
+          versionLabel: "1"
+          templateInputs:
+            type: Deployment
+            spec:
+              environment:
+                environmentRef: <+input>
+                environmentInputs: <+input>
+                serviceOverrideInputs: <+input>
+                infrastructureDefinitions: <+input>
+              service:
+                serviceRef: <+input>
+                serviceInputs: <+input>
+            timeout: <+input>
   variables:
     - name: sapmple
       type: String
