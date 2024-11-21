@@ -126,7 +126,27 @@ pipeline:
               service:
                 serviceRef: <+input>
                 serviceInputs: <+input>
+              execution:
+                steps:
+                  - stepGroup:
+                      identifier: test_step
+                      template:
+                        templateInputs:
+                          variables:
+                            - name: var1
+                              type: String
+                              value: <+input>
+                            - name: var3
+                              type: String
+                              value: <+input>
+                            - name: test
+                              type: String
+                              value: <+input>
             timeout: <+input>
+            variables:
+              - name: a
+                type: String
+                value: <+input>
   variables:
     - name: sapmple
       type: String
