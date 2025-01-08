@@ -152,4 +152,9 @@ pipeline:
       type: String
       description: ""
       required: false
+      value: ""
+    - name: sampleInput
+      type: String
+      description: ""
+      required: false
       value: <+input>
