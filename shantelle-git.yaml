@@ -156,7 +156,7 @@ pipeline:
           deploymentType: Kubernetes
           gitOpsEnabled: true
           service:
-            serviceRef: account.gitops_account
+            serviceRef: gitops_svc
           execution:
             steps:
               - step:
@@ -178,6 +178,7 @@ pipeline:
                   identifier: fetchLinkedApps
                   timeout: 10m
                   spec: {}
+            rollbackSteps: []
           environment:
             environmentRef: abcEnv
             deployToAll: true
